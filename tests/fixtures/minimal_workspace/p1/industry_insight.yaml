@@ -1,0 +1,28 @@
+industry_insight:
+  project_name: Training Plan Management System
+  status: reviewed
+  project_archetype:
+    archetype: internal_operations
+  requirement_maturity:
+    score: 80
+  industry_patterns:
+    - pattern_id: PAT-001
+      name: Approval workflow
+      status: confirmed
+  boundary_notes:
+    - boundary_id: BN-001
+      note: Training execution is outside the minimal plan domain.
+  industry_recommendations:
+    - recommendation_id: REC-001
+      status: confirmed_by_requirement
+      recommendation: Keep approval traceability on plan records.
+    - recommendation_id: REC-002
+      status: recommended_not_confirmed
+      recommendation: Training plans often notify stakeholders after submission.
+  risk_notes:
+    - risk_id: RISK-001
+      risk: Missing required fields can block execution planning.
+  design_decision_backlog:
+    - decision_id: DEC-001
+      decision: Use a single plan aggregate for the minimal fixture.
+  routing_summary: {}

@@ -1,0 +1,8 @@
+$schema: "urn:concept-design:domain-design-index:v1"
+required: [domain_design_index, main_domains]
+domain_design_index:
+  required: [project_name, run_id, truth_sources, domains]
+main_domains:
+  type: array
+  items:
+    required: [domain_id, domain_name, domain_type, domain_prefix, p2_required, context_pack_file, output_file, review_file, repair_file, status, review_status]

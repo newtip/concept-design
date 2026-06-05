@@ -1,0 +1,268 @@
+main_domain_functional_design:
+  domain:
+    domain_id: DM-001
+    domain_name: Training Plan
+    domain_type: core
+  domain_design_intent:
+    primary_business_object: TrainingPlan
+    primary_business_object_reason: Training plan owns draft, required field checks, and submission state.
+    primary_event_chain:
+      - EVT-001
+    primary_user_roles:
+      - Training manager
+    primary_work_scenarios:
+      - Draft annual training plan and submit it for approval.
+    design_goal: Provide a minimal traceable plan drafting workflow.
+    domain_boundary_summary: Training execution and attendance are outside this domain.
+    source:
+      - FUNC-001
+      - CTX-001
+  domain_product_structure:
+    structure_strategy: Single workspace with one plan drafting module.
+    strategy_reason: The fixture has one confirmed function and one aggregate.
+    primary_workspace: Training plan workspace
+    object_detail_pages:
+      - Training plan detail
+    operation_centers:
+      - Training plan list
+    supporting_modules: []
+    admin_configs: []
+    embedded_capabilities: []
+    data_views:
+      - Training plan list view
+    source:
+      - FUNC-001
+  domain_user_journeys:
+    - journey_id: J-001
+      actor: Training manager
+      scenario: Create required plan fields and submit for approval.
+      steps:
+        - Open plan list.
+        - Create plan draft.
+        - Fill target audience and schedule.
+        - Submit plan.
+      source:
+        - WF-001
+  module_relationship_design:
+    relationships:
+      - relationship_id: REL-001
+        from_module: MOD-tp-01
+        to_module: MOD-tp-01
+        relationship_type: internal_state_change
+        concrete_interaction: Draft data is checked before the submitted event is emitted.
+        source:
+          - FUNC-001
+  modules:
+    - module_id: MOD-tp-01
+      module_name: Training Plan Drafting
+      module_positioning:
+        responsibility: Maintain training plan draft fields and submission.
+        out_of_scope:
+          - Training attendance
+        primary_actors:
+          - Training manager
+        primary_user_task: Draft and submit a training plan.
+        product_treatment: Workspace module with list and detail page.
+        treatment_reason: The plan has a lifecycle and requires traceability.
+        entry_point: Training plan list
+        state_change: draft -> submitted
+        source_functions:
+          - FUNC-001
+        source_events:
+          - EVT-001
+        source_rules:
+          - RULE-001
+        source_contexts:
+          - CTX-001
+        source_aggregates:
+          - AGG-001
+      data_model_design:
+        owned_objects:
+          - object_name: TrainingPlan
+            lifecycle_owner: DM-001
+            business_meaning: Drafted plan submitted for approval.
+            key_fields:
+              - plan_name
+              - target_audience
+              - schedule
+              - status
+            source:
+              - AGG-001
+              - RULE-001
+        referenced_objects: []
+        snapshot_objects: []
+        projection_views: []
+        derived_data: []
+      function_design:
+        functions:
+          - function_id: FUNC-001
+            function_name: Create and submit training plan
+            behavior: Save required fields and emit submitted event.
+            preconditions:
+              - Required fields are present.
+            postconditions:
+              - Training plan status becomes submitted.
+            source:
+              - FUNC-001
+              - RULE-001
+      workflow_design:
+        workflows:
+          - workflow_id: WF-001
+            workflow_name: Draft plan and submit for approval
+            trigger: Training manager starts a plan draft.
+            steps:
+              - Draft plan.
+              - Validate required fields.
+              - Submit plan.
+            failure_handling:
+              - Missing required fields keep the plan in draft.
+            source:
+              - WF-001
+      page_design:
+        pages:
+          - page_name: Training plan list
+            page_type: workspace_list
+            page_purpose: Show draft and submitted plans for the training manager.
+            entry_condition: Training manager has plan management permission.
+            style_summary: Dense operational table with status filters.
+            first_screen_information:
+              - Plan name
+              - Target audience
+              - Schedule
+              - Status
+            data_sections:
+              - Plan table
+              - Filter bar
+            interactions:
+              - Create plan
+              - Open plan detail
+            embedded_capabilities: []
+            permissions:
+              - PERM-001
+            source:
+              - FUNC-001
+          - page_name: Training plan detail
+            page_type: object_detail
+            page_purpose: Edit required plan fields and submit the plan.
+            entry_condition: Plan exists or create action has started.
+            style_summary: Form-first detail page with submit action.
+            first_screen_information:
+              - Plan name
+              - Target audience
+              - Schedule
+            data_sections:
+              - Basic information form
+              - Submission status panel
+            interactions:
+              - Save draft
+              - Submit plan
+            embedded_capabilities: []
+            permissions:
+              - PERM-001
+            source:
+              - FUNC-001
+      interface_design:
+        provided_interfaces:
+          - interface_id: API-001
+            name: SubmitTrainingPlan
+            caller: Training plan page
+            behavior: Submit a valid training plan.
+            failure_handling: Return missing-field validation errors.
+            source:
+              - FUNC-001
+        consumed_external_interfaces: []
+        published_events:
+          - event_id: EVT-001
+            event_name: TrainingPlanSubmitted
+            payload_summary:
+              - plan_id
+              - submitted_at
+            source:
+              - EVT-001
+        consumed_events: []
+      unsupported_design: []
+      dfx_design:
+        usability:
+          - Required field errors appear next to fields.
+        maintainability:
+          - Submission validation is isolated in the module service.
+        extensibility:
+          - Additional plan fields can be added inside TrainingPlan.
+        performance:
+          - List view reads paginated plan summaries.
+        security:
+          - Submission requires PERM-001.
+        observability:
+          - Submission event is logged with plan_id.
+        testability:
+          - Required field validation has deterministic cases.
+        reliability:
+          - Failed submission keeps draft unchanged.
+      open_issues: []
+  industry_insight_handling:
+    - insight_id: REC-001
+      handling: Approval traceability is represented through submission event logging.
+      source:
+        - REC-001
+  design_tradeoffs:
+    - tradeoff_id: DEC-001
+      decision: Keep one aggregate for the fixture.
+      reason: The sample has one lifecycle owner.
+      impact: This avoids cross-domain ownership in the minimal E2E.
+      source:
+        - DEC-001
+  data_model_summary:
+    owned_objects:
+      - TrainingPlan
+    referenced_objects: []
+  cross_domain_contract_summary:
+    provided_events:
+      - EVT-001
+    consumed_events: []
+  unsupported_design_summary: []
+  dfx_summary:
+    usability:
+      - Inline required field errors.
+    maintainability:
+      - Single module validation.
+    extensibility:
+      - Field additions stay inside TrainingPlan.
+    performance:
+      - Paginated list view.
+    security:
+      - Permission checked before submit.
+    observability:
+      - Submission event logged.
+    testability:
+      - Validation cases are deterministic.
+    reliability:
+      - Failed submit preserves draft.
+  open_issues_summary: []
+  traceability:
+    source_ids:
+      - FUNC-001
+      - RULE-001
+      - WF-001
+      - EVT-001
+      - CTX-001
+      - AGG-001
+  quality_checks:
+    context_ack:
+      domain_id: DM-001
+      context_pack_used: context-packs/DM-001-context.yaml
+      requirement_context_used: true
+      industry_context_used: true
+      domain_architecture_context_used: true
+      no_forbidden_context_used: true
+    design_depth_check:
+      domain_design_intent_completed: true
+      product_structure_completed: true
+      user_journey_completed: true
+      module_relationship_completed: true
+      module_nine_parts_completed: true
+      design_tradeoffs_completed: true
+      industry_insight_handled: true
+    source_check:
+      all_formal_design_items_have_source: true
+    shallow_design_check:
+      passed: true

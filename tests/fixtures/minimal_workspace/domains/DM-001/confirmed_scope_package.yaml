@@ -1,0 +1,63 @@
+confirmed_scope_package:
+  checkpoint_id: CP-001
+  confirmation_status: confirmed_with_modifications
+  domain_id: DM-001
+  domain_name: Training Plan
+  confirmed_at: "fixture"
+  accepted_item_ids: [DM-001, SD-001, EVT-001, REQ-001, RISK-001, BOUND-001, EXC-001, Q-001]
+  modified_item_ids: [SD-002-M]
+  added_item_ids: [REQ-005-N]
+  deleted_item_ids: [EVT-004]
+  open_issue_ids: [Q-001]
+  domains:
+    - domain_id: DM-001
+      domain_name: Training Plan
+      subdomains:
+        - subdomain_id: SD-001
+          subdomain_name: Training Plan Drafting
+          accepted_domain_events:
+            - event_id: EVT-001
+              name: TrainingPlanSubmitted
+              source_ids: [REQ-001]
+          accepted_enrichment:
+            risks:
+              - id: RISK-001
+                title: Missing required fields can block execution planning
+                handling_policy: must_handle_in_design
+            boundaries:
+              - id: BOUND-001
+                title: Training execution remains out of scope
+                handling_policy: scope_constraint
+            exceptions:
+              - id: EXC-001
+                title: Submission failure must keep draft unchanged
+                handling_policy: must_handle_in_workflow
+          open_issues:
+            - id: Q-001
+              decision: keep_as_open_issue
+              note: Current fixture does not design approval workflow.
+          added_items:
+            - item_id: REQ-005-N
+              title: Added fixture requirement
+          deleted_items:
+            - item_id: EVT-004
+              reason: Current project does not support registration cancellation.
+        - subdomain_id: SD-002-M
+          original_item_id: SD-002
+          subdomain_name: Training Registration Record
+          accepted_domain_events: []
+          accepted_enrichment:
+            risks: []
+            boundaries: []
+            exceptions: []
+          open_issues: []
+          added_items: []
+          deleted_items: []
+  source_registry:
+    REQ-001: {source_id: REQ-001, category: requirement, source_type: requirement_fact, title: Create and submit training plan, status: confirmed, allowed_usage: [formal_design, formal_function], forbidden_usage: []}
+    REQ-005-N: {source_id: REQ-005-N, category: requirement, source_type: requirement_fact, title: Added fixture requirement, status: confirmed, allowed_usage: [formal_design, formal_function], forbidden_usage: []}
+    EVT-001: {source_id: EVT-001, category: event, source_type: requirement_fact, title: Training plan submitted, status: confirmed, allowed_usage: [formal_design, workflow], forbidden_usage: []}
+    RISK-001: {source_id: RISK-001, category: risk, source_type: risk_note, title: Missing required fields can block execution planning, status: risk_note, allowed_usage: [dfx, exception_flow], forbidden_usage: [formal_function]}
+    BOUND-001: {source_id: BOUND-001, category: boundary, source_type: boundary_note, title: Training execution remains out of scope, status: confirmed, allowed_usage: [boundary], forbidden_usage: [formal_function]}
+    EXC-001: {source_id: EXC-001, category: exception, source_type: exception_note, title: Submission failure must keep draft unchanged, status: confirmed, allowed_usage: [exception_flow], forbidden_usage: [formal_function]}
+    Q-001: {source_id: Q-001, category: question, source_type: open_question, title: Is approval workflow required, status: unresolved, allowed_usage: [open_issue], forbidden_usage: [formal_design, formal_function]}

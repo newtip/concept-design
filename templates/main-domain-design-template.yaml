@@ -1,0 +1,209 @@
+# 主领域功能设计模板
+
+main_domain_functional_design:
+  domain:
+    domain_id: "{{domain_id}}"
+    domain_name: "{{domain_name}}"
+    domain_type: "{{core|supporting|generic}}"
+    responsibility: "{{responsibility}}"
+    out_of_scope: []
+
+  domain_design_intent:
+    primary_business_object: ""
+    primary_business_object_reason: ""
+    primary_event_chain: []
+    primary_user_roles: []
+    primary_work_scenarios: []
+    design_goal: []
+    domain_boundary_summary:
+      owns: []
+      references: []
+      must_not_own: []
+      collaborates_with: []
+    source: []
+
+  domain_product_structure:
+    structure_strategy: "workspace_centered|object_centered|workflow_centered|approval_centered|configuration_centered|supporting_capability|data_view_centered|mixed"
+    strategy_reason: ""
+    primary_workspace:
+      exists: true
+      page_name: ""
+      reason: ""
+    object_detail_pages: []
+    operation_centers: []
+    supporting_modules: []
+    admin_configs: []
+    embedded_capabilities: []
+    data_views: []
+    source: []
+
+  domain_user_journeys:
+    - journey_id: "JOURNEY-001"
+      journey_name: ""
+      actor: ""
+      goal: ""
+      entry_point: ""
+      related_modules: []
+      steps: []
+      exception_points: []
+      source: []
+
+  module_relationship_design:
+    modules:
+      - module_id: "{{module_id}}"
+        module_name: "{{module_name}}"
+        product_treatment: ""
+        responsibility: ""
+        primary_user_task: ""
+        source: []
+    intra_domain_relationships: []
+    cross_domain_relationships: []
+
+  modules:
+    - module_id: "{{module_id}}"
+      module_name: "{{module_name}}"
+      source_sub_domain: ""
+      source_context: ""
+      module_positioning:
+        responsibility: ""
+        out_of_scope: []
+        primary_actors: []
+        primary_user_task: ""
+        product_treatment: "primary_workspace|object_detail|operation_center|supporting_module|admin_config|embedded_capability|data_view|external_capability"
+        treatment_reason: ""
+        entry_point: ""
+        state_change: ""
+        source_functions: []
+        source_events: []
+        source_rules: []
+        source_contexts: []
+        source_aggregates: []
+      data_model_design:
+        owned_objects: []
+        referenced_objects: []
+        snapshot_objects: []
+        projection_views: []
+        derived_data: []
+        state_model: []
+        data_constraints: []
+        cross_domain_data_usage: []
+      function_design:
+        functions: []
+      workflow_design:
+        main_flow: []
+        exception_flows: []
+      page_design:
+        pages:
+          - page_name: ""
+            page_type: "primary_workspace|object_detail|list|form|approval|dashboard|config|embedded_modal|embedded_drawer|tab_panel|log_view|embedded_capability"
+            page_purpose: ""
+            entry_condition: ""
+            style_summary: ""
+            first_screen_information: []
+            data_sections:
+              - section_name: ""
+                displayed_data: []
+                data_source: "current_module|same_domain_module|external_domain_projection|snapshot|derived"
+                source_detail: ""
+            interactions:
+              - action: ""
+                interaction_type: "submit|query|navigate|open_modal|open_drawer|inline_edit|approve|reject|export|import|configure"
+                result: ""
+                state_change: ""
+                related_function: ""
+                failure_feedback: ""
+            embedded_capabilities: []
+            permissions:
+              - role: ""
+                page_access: true
+                operations: []
+                data_scope: ""
+                field_restrictions: []
+            source: []
+      interface_design:
+        provided_interfaces: []
+        consumed_external_interfaces: []
+        published_events: []
+        consumed_events: []
+      unsupported_design:
+        - unsupported_item: ""
+          unsupported_type: "scope_out|platform_limit|unconfirmed_requirement|domain_boundary|external_dependency"
+          reason: ""
+          impact: ""
+          workaround: ""
+          source: []
+      dfx_design:
+        usability: []
+        maintainability: []
+        extensibility: []
+        performance: []
+        security: []
+        observability: []
+        testability: []
+        reliability: []
+      open_issues:
+        - issue_id: ""
+          issue: ""
+          issue_type: "requirement_gap|user_decision|industry_assumption|domain_boundary|external_dependency|platform_constraint|technical_detail"
+          impact: ""
+          affected_design_parts: []
+          suggested_owner: ""
+          blocking: false
+          default_strategy: ""
+          source: []
+
+  industry_insight_handling: []
+  design_tradeoffs: []
+
+  data_model_summary:
+    owned_objects_summary: []
+    referenced_objects_summary: []
+    snapshot_summary: []
+    projection_summary: []
+    cross_domain_data_boundary: []
+
+  cross_domain_contract_summary:
+    provided_to_others: []
+    consumed_from_others: []
+    forbidden_direct_access: []
+
+  unsupported_design_summary: []
+
+  dfx_summary:
+    usability: []
+    maintainability: []
+    extensibility: []
+    performance: []
+    security: []
+    observability: []
+    testability: []
+    reliability: []
+
+  open_issues_summary:
+    blocking_issues: []
+    non_blocking_issues: []
+
+  traceability: []
+
+  quality_checks:
+    context_ack:
+      domain_id: "{{domain_id}}"
+      context_pack_used: true
+      requirement_context_used: true
+      industry_context_used: true
+      domain_architecture_context_used: true
+      no_forbidden_context_used: true
+    design_depth_check:
+      domain_design_intent_completed: true
+      product_structure_completed: true
+      user_journey_completed: true
+      module_relationship_completed: true
+      module_nine_parts_completed: true
+      design_tradeoffs_completed: true
+      industry_insight_handled: true
+    source_check:
+      all_formal_design_items_have_source: true
+      missing_source_items: []
+    shallow_design_check:
+      generic_phrases_detected: []
+      passed: true

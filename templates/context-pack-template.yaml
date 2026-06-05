@@ -1,0 +1,128 @@
+# Context Pack 模板
+# Orchestrator 为每个 DDD 领域生成一个冻结上下文包；P2 Agent 只读取自己的 Context Pack。
+
+context_pack:
+  meta:
+    context_pack_id: "CP-{{domain_id}}"
+    domain_id: "{{domain_id}}"
+    domain_name: "{{domain_name}}"
+    run_id: "{{run_id}}"
+    generated_at: "{{generated_at}}"
+    status: "frozen"
+    source: "architecture_design.domains[].requirement_scope + industry_scope + ddd_scope"
+
+  current_domain:
+    domain_id: "{{domain_id}}"
+    domain_name: "{{domain_name}}"
+    domain_prefix: "{{domain_prefix}}"
+    domain_type: "{{core|supporting|generic}}"
+    responsibility: "{{responsibility}}"
+    out_of_scope: []
+    sub_domains: []
+    boundary_reasoning:
+      why_this_domain_exists: ""
+      why_not_in_other_domain: ""
+      key_lifecycle_objects: []
+      key_consistency_rules: []
+
+  requirement_context:
+    business_goals: []
+    actors: []
+    functions: []
+    workflows: []
+    commands: []
+    policies: []
+    events:
+      produced: []
+      consumed: []
+      related: []
+    business_rules: []
+    permissions: []
+    integrations: []
+    open_questions: []
+
+  industry_context:
+    project_archetype: {}
+    requirement_maturity: {}
+    industry_patterns: []
+    boundary_notes: []
+    industry_recommendations:
+      confirmed_by_requirement: []
+      recommended_not_confirmed: []
+      assumption_for_review: []
+      question_only: []
+    risk_notes: []
+    design_decision_backlog: []
+    routing_summary: {}
+
+  domain_architecture_context:
+    contexts: []
+    aggregates: []
+    owned_objects: []
+    referenced_objects: []
+    domain_events: []
+    context_relationships: []
+    shared_object_ownership: []
+
+  related_domain_summaries:
+    - domain_id: ""
+      domain_name: ""
+      domain_type: ""
+      owned_objects: []
+      allowed_usage: ["id_reference", "snapshot", "projection", "event", "acl"]
+      forbidden_usage: ["own_lifecycle", "direct_mutation"]
+
+  negative_context:
+    out_of_scope: []
+    forbidden_inference:
+      - "不得新增 source_registry 中不存在的 FUNC / EVT / RULE / REC / RISK / DEC / CTX / AGG"
+      - "不得把 recommended_not_confirmed 或 question_only 写成正式功能"
+      - "不得读取原始 Word 或其他领域完整设计文件"
+    unavailable_information: []
+
+  decision_boundary:
+    can_decide:
+      - "模块内页面组织"
+      - "接口形状"
+      - "模块局部DFX"
+      - "非阻塞open_issue表述"
+    cannot_decide:
+      - "新增主领域"
+      - "修改需求基线"
+      - "修改领域边界"
+      - "改变共享对象Owner"
+      - "确认未确认行业建议"
+
+  source_registry:
+    REQ-001:
+      source_id: "REQ-001"
+      category: "requirement"
+      source_type: "requirement_fact"
+      title: ""
+      status: "confirmed"
+      allowed_usage: ["formal_design", "formal_function", "workflow"]
+      forbidden_usage: []
+    IND-001:
+      source_id: "IND-001"
+      category: "recommendation"
+      source_type: "industry_enrichment"
+      title: ""
+      status: "recommended_not_confirmed"
+      allowed_usage: ["edge_case", "exception_flow"]
+      forbidden_usage: ["formal_design", "formal_function"]
+    RISK-001:
+      source_id: "RISK-001"
+      category: "risk"
+      source_type: "risk_note"
+      title: ""
+      status: "risk_note"
+      allowed_usage: ["dfx", "exception_flow"]
+      forbidden_usage: ["formal_function", "confirmed_requirement"]
+    Q-001:
+      source_id: "Q-001"
+      category: "question"
+      source_type: "open_question"
+      title: ""
+      status: "unresolved"
+      allowed_usage: ["open_issue"]
+      forbidden_usage: ["formal_design", "formal_function"]

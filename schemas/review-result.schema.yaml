@@ -1,0 +1,66 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: Concept Design Review Result
+type: object
+required:
+  - review_result
+properties:
+  review_result:
+    type: object
+    required:
+      - domain_id
+      - status
+      - reviewed_modules
+      - issue_count
+      - blocker_count
+      - critical_count
+      - source_check_count
+      - generic_issue_count
+      - issues
+    properties:
+      domain_id:
+        type: string
+        minLength: 1
+      status:
+        type: string
+        enum: [passed, failed]
+      reviewed_modules:
+        type: array
+        items:
+          type: string
+      issue_count:
+        type: integer
+        minimum: 0
+      blocker_count:
+        type: integer
+        minimum: 0
+      critical_count:
+        type: integer
+        minimum: 0
+      source_check_count:
+        type: integer
+        minimum: 0
+      generic_issue_count:
+        type: integer
+        minimum: 0
+      issues:
+        type: array
+        items:
+          type: object
+          required: [issue_id, severity, yaml_path, problem, evidence, required_fix]
+          properties:
+            issue_id:
+              type: string
+            severity:
+              type: string
+              enum: [blocker, critical, major, minor]
+            yaml_path:
+              type: string
+            problem:
+              type: string
+            evidence:
+              type: string
+            required_fix:
+              type: string
+            need_human:
+              type: boolean
+additionalProperties: false

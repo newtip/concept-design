@@ -1,0 +1,182 @@
+p2_execution_mode: mode_a_sequential
+domain_design_index:
+  project_name: Training Plan Management System
+  run_id: e2e-minimal
+  p2_execution_mode: mode_a_sequential
+  design_mode:
+    mode: mode_a_sequential
+    locked: true
+  truth_sources:
+    business_model: baselines/business_model.yaml
+    industry_insight: baselines/industry_insight.yaml
+    architecture_design: baselines/architecture_design.yaml
+  domains:
+    - domain_id: DM-001
+      domain_name: Training Plan
+      domain_type: core
+      domain_prefix: tp
+      p2_required: true
+      required_for_p3: true
+      sequence: 1
+      is_anchor: true
+      depends_on: []
+      design_level: full
+      context_pack_file: context-packs/DM-001-context.yaml
+      output_file: domains/DM-001/tp-main-domain-functional-design.yaml
+      design_file: domains/DM-001/tp-main-domain-functional-design.yaml
+      review_file: domains/DM-001/tp-review-checklist.md
+      review_result_file: domains/DM-001/review-result.yaml
+      review_report_file: domains/DM-001/review-report.md
+      confirmed_design_scope_file: domains/DM-001/confirmed_design_scope.yaml
+      confirmed_scope_package_file: domains/DM-001/confirmed_scope_package.yaml
+      repair_file: domains/DM-001/tp-repair-log.md
+      sub_domains:
+        - module_id: MOD-tp-01
+          subdomain_id: SD-001
+          module_name: Training Plan Drafting
+        - module_id: MOD-tp-02
+          subdomain_id: SD-002
+          module_name: Training Registration Management
+      status: pending
+      stage: pending
+      last_transition_at: ""
+      last_transition_reason: ""
+      review_round: 0
+      repair_round: 0
+      review_status: missing
+      repair_status: not_required
+      blocked_reason: ""
+      deferred_reason: ""
+      blocking_issues: []
+    - domain_id: DM-002
+      domain_name: Notification Support
+      domain_type: supporting
+      domain_prefix: ns
+      p2_required: true
+      required_for_p3: false
+      sequence: 2
+      is_anchor: false
+      depends_on: [DM-001]
+      design_level: full
+      context_pack_file: context-packs/DM-002-context.yaml
+      output_file: domains/DM-002/ns-main-domain-functional-design.yaml
+      design_file: domains/DM-002/ns-main-domain-functional-design.yaml
+      review_file: domains/DM-002/ns-review-checklist.md
+      review_result_file: domains/DM-002/review-result.yaml
+      review_report_file: domains/DM-002/review-report.md
+      confirmed_design_scope_file: domains/DM-002/confirmed_design_scope.yaml
+      confirmed_scope_package_file: domains/DM-002/confirmed_scope_package.yaml
+      repair_file: domains/DM-002/ns-repair-log.md
+      sub_domains:
+        - module_id: MOD-ns-01
+          module_name: Notification Dispatch
+      status: pending
+      stage: pending
+      last_transition_at: ""
+      last_transition_reason: ""
+      review_round: 0
+      repair_round: 0
+      review_status: missing
+      repair_status: not_required
+      blocked_reason: ""
+      deferred_reason: ""
+      blocking_issues: []
+    - domain_id: DM-003
+      domain_name: Audit Common
+      domain_type: generic
+      domain_prefix: au
+      p2_required: true
+      required_for_p3: false
+      sequence: 3
+      is_anchor: false
+      depends_on: []
+      design_level: full
+      context_pack_file: context-packs/DM-003-context.yaml
+      output_file: domains/DM-003/au-main-domain-functional-design.yaml
+      design_file: domains/DM-003/au-main-domain-functional-design.yaml
+      review_file: domains/DM-003/au-review-checklist.md
+      review_result_file: domains/DM-003/review-result.yaml
+      review_report_file: domains/DM-003/review-report.md
+      confirmed_design_scope_file: domains/DM-003/confirmed_design_scope.yaml
+      confirmed_scope_package_file: domains/DM-003/confirmed_scope_package.yaml
+      repair_file: domains/DM-003/au-repair-log.md
+      source_functions: [FUNC-003]
+      sub_domains:
+        - module_id: MOD-au-01
+          module_name: Audit Trail
+      status: pending
+      stage: pending
+      last_transition_at: ""
+      last_transition_reason: ""
+      review_round: 0
+      repair_round: 0
+      review_status: missing
+      repair_status: not_required
+      blocked_reason: ""
+      deferred_reason: ""
+      blocking_issues: []
+project_name: Training Plan Management System
+run_id: e2e-minimal
+main_domains:
+  - domain_id: DM-001
+    domain_name: Training Plan
+    domain_type: core
+    domain_prefix: tp
+    p2_required: true
+    required_for_p3: true
+    sequence: 1
+    is_anchor: true
+    depends_on: []
+    context_pack_file: context-packs/DM-001-context.yaml
+    output_file: domains/DM-001/tp-main-domain-functional-design.yaml
+    design_file: domains/DM-001/tp-main-domain-functional-design.yaml
+    review_file: domains/DM-001/tp-review-checklist.md
+    review_result_file: domains/DM-001/review-result.yaml
+    review_report_file: domains/DM-001/review-report.md
+    confirmed_design_scope_file: domains/DM-001/confirmed_design_scope.yaml
+    confirmed_scope_package_file: domains/DM-001/confirmed_scope_package.yaml
+    subdomains:
+      - subdomain_id: SD-001
+        subdomain_name: Training Plan Drafting
+      - subdomain_id: SD-002
+        subdomain_name: Training Registration Management
+    status: pending
+    stage: pending
+  - domain_id: DM-002
+    domain_name: Notification Support
+    domain_type: supporting
+    domain_prefix: ns
+    p2_required: true
+    required_for_p3: false
+    sequence: 2
+    is_anchor: false
+    depends_on: [DM-001]
+    context_pack_file: context-packs/DM-002-context.yaml
+    output_file: domains/DM-002/ns-main-domain-functional-design.yaml
+    design_file: domains/DM-002/ns-main-domain-functional-design.yaml
+    review_file: domains/DM-002/ns-review-checklist.md
+    review_result_file: domains/DM-002/review-result.yaml
+    review_report_file: domains/DM-002/review-report.md
+    confirmed_design_scope_file: domains/DM-002/confirmed_design_scope.yaml
+    confirmed_scope_package_file: domains/DM-002/confirmed_scope_package.yaml
+    status: pending
+    stage: pending
+  - domain_id: DM-003
+    domain_name: Audit Common
+    domain_type: generic
+    domain_prefix: au
+    p2_required: true
+    required_for_p3: false
+    sequence: 3
+    is_anchor: false
+    depends_on: []
+    context_pack_file: context-packs/DM-003-context.yaml
+    output_file: domains/DM-003/au-main-domain-functional-design.yaml
+    design_file: domains/DM-003/au-main-domain-functional-design.yaml
+    review_file: domains/DM-003/au-review-checklist.md
+    review_result_file: domains/DM-003/review-result.yaml
+    review_report_file: domains/DM-003/review-report.md
+    confirmed_design_scope_file: domains/DM-003/confirmed_design_scope.yaml
+    confirmed_scope_package_file: domains/DM-003/confirmed_scope_package.yaml
+    status: pending
+    stage: pending

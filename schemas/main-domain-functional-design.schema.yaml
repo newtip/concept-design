@@ -1,0 +1,195 @@
+# 主领域功能设计统一 Schema
+# 所有 P2 主领域输出必须通过此 Schema 校验
+# 版本: 1.0 / 2026-06-03
+
+$schema: "urn:concept-design-orchestrator:main-domain-functional-design:v1"
+
+required:
+  - main_domain_functional_design
+
+main_domain_functional_design:
+  required:
+    - domain
+    - domain_design_intent
+    - domain_product_structure
+    - domain_user_journeys
+    - module_relationship_design
+    - modules
+    - industry_insight_handling
+    - design_tradeoffs
+    - data_model_summary
+    - cross_domain_contract_summary
+    - unsupported_design_summary
+    - dfx_summary
+    - open_issues_summary
+    - traceability
+    - quality_checks
+
+  domain:
+    required: [domain_id, domain_name, domain_prefix, domain_type, responsibility]
+    properties:
+      domain_id: { type: string, pattern: '^DM-\\d{3}$' }
+      domain_name: { type: string }
+      domain_type: { type: string, enum: [core, supporting, generic] }
+      domain_prefix: { type: string }
+      responsibility: { type: string }
+      out_of_scope: { type: array, items: { type: string } }
+
+  module_relationship_design:
+    required: [intra_domain_relationships, cross_domain_relationships]
+
+  modules:
+    type: array
+    minItems: 1
+    items:
+      required:
+        - module_id
+        - module_name
+        - module_positioning
+        - data_model_design
+        - function_design
+        - workflow_design
+        - page_design
+        - interface_design
+        - unsupported_design
+        - dfx_design
+        - open_issues
+      properties:
+        module_id: { type: string, pattern: '^MOD-[a-z]+-\\d{2}$' }
+        module_name: { type: string }
+        source_sub_domain: { type: string }
+        source_context: { type: string }
+
+        module_positioning:
+          required:
+            - responsibility
+            - out_of_scope
+            - primary_actors
+            - primary_user_task
+            - product_treatment
+            - treatment_reason
+            - entry_point
+            - state_change
+            - source_functions
+            - source_events
+            - source_rules
+            - source_contexts
+            - source_aggregates
+
+        data_model_design:
+          required: [owned_objects, referenced_objects]
+          properties:
+            owned_objects: { type: array }
+            referenced_objects: { type: array }
+            snapshot_objects: { type: array }
+            projection_views: { type: array }
+            derived_data: { type: array }
+            state_model: { type: array }
+            data_constraints: { type: array }
+            cross_domain_data_usage: { type: array }
+
+        function_design:
+          required: [functions]
+          properties:
+            functions: { type: array }
+
+        workflow_design:
+          required: [main_flow, exception_flows]
+          properties:
+            main_flow: { type: array }
+            exception_flows: { type: array }
+
+        page_design:
+          required: [pages]
+          properties:
+            pages: { type: array }
+
+        interface_design:
+          required: [provided_interfaces]
+          properties:
+            provided_interfaces: { type: array }
+            consumed_external_interfaces: { type: array }
+            cross_domain_dependencies: { type: array }
+            events_published: { type: array }
+            events_consumed: { type: array }
+            published_events: { type: array }
+            consumed_events: { type: array }
+            failure_handling: { type: string }
+
+        unsupported_design:
+          type: array
+          items:
+            properties:
+              unsupported_item: { type: string }
+              unsupported_type: { type: string, enum: [scope_out, platform_limit, unconfirmed_requirement, domain_boundary, external_dependency] }
+              reason: { type: string }
+              impact: { type: string }
+              workaround: { type: string }
+              source: { type: string }
+              platform_support: { type: string }
+              source_boundary: { type: string }
+
+        dfx_design:
+          properties:
+            usability: { type: array }
+            maintainability: { type: array }
+            extensibility: { type: array }
+            performance: { type: array }
+            security: { type: array }
+            observability: { type: array }
+            testability: { type: array }
+            reliability: { type: array }
+
+        open_issues:
+          type: array
+          items:
+            properties:
+              issue_id: { type: string }
+              issue: { type: string }
+              issue_type: { type: string }
+              impact: { type: string }
+              affected_design_parts: { type: array }
+              suggested_owner: { type: string }
+              blocking: { type: boolean }
+              default_strategy: { type: string }
+              suggested_resolution: { type: string }
+
+  data_model_summary:
+    required: [owned_objects_summary, referenced_objects_summary, snapshot_summary, projection_summary, cross_domain_data_boundary]
+
+  cross_domain_contract_summary:
+    required: [provided_to_others, consumed_from_others, forbidden_direct_access]
+
+  unsupported_design_summary:
+    type: array
+
+  dfx_summary:
+    required: [usability, maintainability, extensibility, performance, security, observability, testability, reliability]
+
+  open_issues_summary:
+    required: [blocking_issues, non_blocking_issues]
+
+  traceability:
+    type: array
+
+  quality_checks:
+    required: [context_ack, design_depth_check, source_check, shallow_design_check]
+    context_ack:
+      required: [domain_id, context_pack_used, requirement_context_used, industry_context_used, domain_architecture_context_used, no_forbidden_context_used]
+
+# 🔴 禁止的 YAML 结构（反模式检测）
+anti_patterns:
+  - description: "禁止模块名作为 YAML key（如 mod_tp_01_xxx:）"
+    fix: "必须用 modules[].module_id 数组"
+  - description: "禁止 domain_functional_design 作为顶层 key（旧版兼容）"
+    fix: "必须用 main_domain_functional_design"
+  - description: "禁止 aggregate_design / domain_services / repository_interface 作为 P2 主结构"
+    fix: "这些内容只能作为模块设计的依据，不作为 P2 主体结构"
+  - description: "禁止 unsupported_design 使用非统一字段名（capability/item 等）"
+    fix: "必须用 unsupported_item / unsupported_type / reason / impact / workaround / source"
+  - description: "禁止 DFX 只写 risks/mitigation 泛化词"
+    fix: "必须按 usability/maintainability/extensibility/performance/security/observability/testability/reliability 分类输出"
+  - description: "禁止页面只写 page_name/page_type 无四件套"
+    fix: "页面必须包含 style/data_sections/interactions/permissions"
+  - description: "禁止模块关系使用泛化描述（共享业务对象/协同处理等）"
+    fix: "每条关系必须说明：上游事实/下游消费/关系类型/传递内容/失败处理"

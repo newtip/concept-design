@@ -1,0 +1,14 @@
+item_registry:
+  items:
+    REQ-001: {item_id: REQ-001, item_type: requirement_fact, title: Create and submit training plan, payload: {}}
+    REQ-002: {item_id: REQ-002, item_type: requirement_fact, title: Required training plan fields, payload: {}}
+    IND-001: {item_id: IND-001, item_type: industry_enrichment, title: Approval traceability recommendation, payload: {}}
+    RISK-001: {item_id: RISK-001, item_type: risk_note, title: Missing required fields can block execution planning, payload: {}}
+    BOUND-001: {item_id: BOUND-001, item_type: boundary_note, title: Training execution remains out of scope, payload: {}}
+    EXC-001: {item_id: EXC-001, item_type: exception_note, title: Submission failure must keep draft unchanged, payload: {}}
+    Q-001: {item_id: Q-001, item_type: open_question, title: Is approval workflow required, payload: {}}
+    DM-001: {item_id: DM-001, item_type: domain, title: Training Plan, payload: {}}
+    SD-001: {item_id: SD-001, item_type: subdomain, title: Training Plan Drafting, payload: {}}
+    SD-002: {item_id: SD-002, item_type: subdomain, title: Training Registration Management, payload: {}}
+    EVT-001: {item_id: EVT-001, item_type: domain_event, title: Training plan submitted, payload: {}}
+    EVT-004: {item_id: EVT-004, item_type: domain_event, title: Training registration cancelled, payload: {}}

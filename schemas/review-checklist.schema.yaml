@@ -1,0 +1,9 @@
+$schema: "urn:concept-design:review-checklist:v1"
+required_markers:
+  - Review 结论
+  - 输入确认
+  - 模块逐项检查
+  - Source ID
+  - 泛化设计
+  - 问题清单
+  - Re-report

@@ -1,0 +1,11 @@
+type: object
+required:
+  - summary_report
+properties:
+  summary_report:
+    type: object
+    required:
+      - report_type
+    properties:
+      report_type:
+        enum: [pre_p2, p2_checkpoint, p3_workspaces]

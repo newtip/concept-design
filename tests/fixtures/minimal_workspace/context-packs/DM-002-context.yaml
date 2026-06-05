@@ -1,0 +1,53 @@
+context_pack:
+  meta:
+    context_pack_id: CP-DM-002
+    domain_id: DM-002
+    domain_name: Notification Support
+    run_id: e2e-minimal
+    status: frozen
+  current_domain:
+    domain_id: DM-002
+    domain_name: Notification Support
+    domain_prefix: ns
+    domain_type: supporting
+    responsibility: Send stakeholder notifications for submitted plans.
+  requirement_context:
+    functions:
+      - function_id: FUNC-002
+        name: Notify plan stakeholders
+    events:
+      produced:
+        - event_id: EVT-002
+      consumed:
+        - event_id: EVT-001
+      related: []
+  industry_context:
+    boundary_notes:
+      - boundary_id: BN-001
+    risk_notes: []
+  domain_architecture_context:
+    contexts:
+      - context_id: CTX-002
+    aggregates:
+      - aggregate_id: AGG-002
+  related_domain_summaries:
+    - domain_id: DM-001
+      domain_name: Training Plan
+      allowed_usage: [event]
+  negative_context:
+    forbidden_inference:
+      - Do not read anchor full design output.
+  decision_boundary:
+    can_decide: [Notification dispatch details]
+    cannot_decide: [Training plan lifecycle]
+  source_registry:
+    FUNC-002: {source_id: FUNC-002, category: requirement, source_type: requirement_fact, title: Notify plan stakeholders, status: confirmed, allowed_usage: [formal_design, formal_function, workflow], forbidden_usage: []}
+    EVT-001: {source_id: EVT-001, category: event, source_type: requirement_fact, title: Training plan submitted, status: confirmed, allowed_usage: [formal_design, workflow, event], forbidden_usage: []}
+    EVT-002: {source_id: EVT-002, category: event, source_type: requirement_fact, title: Stakeholder notification requested, status: confirmed, allowed_usage: [formal_design, workflow, event], forbidden_usage: []}
+    CTX-002: {source_id: CTX-002, category: architecture, source_type: requirement_fact, title: Notification Context, status: confirmed, allowed_usage: [formal_design], forbidden_usage: []}
+    AGG-002: {source_id: AGG-002, category: architecture, source_type: requirement_fact, title: NotificationTask, status: confirmed, allowed_usage: [formal_design], forbidden_usage: []}
+    REC-002: {source_id: REC-002, category: recommendation, source_type: industry_enrichment, title: Training plans often notify stakeholders after submission, status: recommended_not_confirmed, allowed_usage: [edge_case, exception_flow], forbidden_usage: [formal_design, formal_function]}
+    RISK-001: {source_id: RISK-001, category: risk, source_type: risk_note, title: Missing required fields can block execution planning, status: risk_note, allowed_usage: [dfx, exception_flow], forbidden_usage: [formal_function, confirmed_requirement]}
+    Q-001: {source_id: Q-001, category: question, source_type: open_question, title: Is approval workflow required in this minimal fixture, status: unresolved, allowed_usage: [open_issue], forbidden_usage: [formal_design, formal_function]}
+  source_resolution:
+    missing_ids: []

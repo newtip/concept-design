@@ -1,0 +1,96 @@
+business_model:
+  project_name: Training Plan Management System
+  status: reviewed
+  source_id_index:
+    functions: [FUNC-001, FUNC-002, FUNC-003]
+    open_questions: [Q-001]
+    events: [EVT-001, EVT-002]
+    business_rules: [RULE-001]
+    workflows: [WF-001]
+    actors: [ACTOR-001]
+  requirement_facts:
+    - id: REQ-001
+      title: Create and submit training plan
+      source_id: REQ-001
+    - id: REQ-002
+      title: Training plan must include target audience and schedule
+      source_id: RULE-001
+  industry_enrichment:
+    - id: IND-001
+      title: Approval traceability recommendation
+  risk_notes:
+    - id: RISK-001
+      title: Missing required fields can block execution planning
+  boundary_notes:
+    - id: BOUND-001
+      title: Training execution remains out of scope
+  exception_notes:
+    - id: EXC-001
+      title: Submission failure must keep draft unchanged
+  open_questions_numbered:
+    - id: Q-001
+      title: Is approval workflow required in this minimal fixture?
+  business_goals:
+    - goal_id: GOAL-001
+      description: Manage annual training plans with approval traceability.
+      source_id: FUNC-001
+      status: confirmed
+      source_type: requirement
+  actors:
+    - actor_id: ACTOR-001
+      name: Training manager
+      status: confirmed
+      source_id: FUNC-001
+  functions:
+    - function_id: FUNC-001
+      name: Create and submit training plan
+      status: confirmed
+      source_id: FUNC-001
+    - function_id: FUNC-002
+      name: Notify plan stakeholders
+      status: confirmed
+      source_id: FUNC-002
+    - function_id: FUNC-003
+      name: Record audit trace
+      status: confirmed
+      source_id: FUNC-003
+  workflows:
+    - workflow_id: WF-001
+      name: Draft plan and submit for approval
+      status: confirmed
+      source_id: FUNC-001
+  commands:
+    - command_id: CMD-001
+      name: Submit training plan
+      status: confirmed
+      source_id: FUNC-001
+  policies:
+    - policy_id: POL-001
+      name: Plan must include target audience and schedule
+      status: confirmed
+      source_id: RULE-001
+  business_rules:
+    - rule_id: RULE-001
+      name: Required plan fields
+      status: confirmed
+      source_id: RULE-001
+  permissions:
+    - permission_id: PERM-001
+      name: Training manager can submit plan
+      status: confirmed
+      source_id: FUNC-001
+  integrations: []
+  events:
+    - event_id: EVT-001
+      name: Training plan submitted
+      status: confirmed
+      source_id: FUNC-001
+    - event_id: EVT-002
+      name: Stakeholder notification requested
+      status: confirmed
+      source_id: FUNC-002
+  open_questions:
+    - question_id: Q-001
+      question: Is approval workflow required in this minimal fixture?
+      status: unresolved
+      source_id: Q-001

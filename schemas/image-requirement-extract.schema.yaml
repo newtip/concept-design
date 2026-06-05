@@ -1,0 +1,20 @@
+type: object
+required:
+  - image_requirement_extract
+properties:
+  image_requirement_extract:
+    type: object
+    required:
+      - image_id
+      - status
+      - extracted_items
+      - open_questions
+    properties:
+      image_id:
+        type: string
+      status:
+        type: string
+      extracted_items:
+        type: array
+      open_questions:
+        type: array

@@ -1,0 +1,15 @@
+$schema: "urn:concept-design:document-ir:v1"
+required: [document_ir]
+document_ir:
+  required: [document_id, filename, parser_version, blocks]
+  blocks:
+    type: array
+    items:
+      required: [block_id, block_type, order]
+      properties:
+        block_type:
+          enum: [heading, paragraph, table]
+        block_id:
+          pattern: "^B-\\d{4}$"
+        table_id:
+          pattern: "^T-\\d{3}$"

@@ -1,0 +1,17 @@
+review_result:
+  domain_id: "{{domain_id}}"
+  status: "{{passed|failed}}"
+  reviewed_modules: []
+  issue_count: 0
+  blocker_count: 0
+  critical_count: 0
+  source_check_count: 0
+  generic_issue_count: 0
+  issues:
+    - issue_id: "{{ISSUE-001}}"
+      severity: "{{blocker|critical|major|minor}}"
+      yaml_path: "{{yaml_path}}"
+      problem: "{{problem}}"
+      evidence: "{{evidence}}"
+      required_fix: "{{fix}}"
+      need_human: false

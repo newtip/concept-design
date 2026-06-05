@@ -1,0 +1,35 @@
+type: object
+required:
+  - image_manifest
+properties:
+  image_manifest:
+    type: array
+    items:
+      type: object
+      required:
+        - image_id
+        - filename
+        - extension
+        - order
+        - near_block_id
+        - section_path
+      properties:
+        image_id:
+          type: string
+          pattern: "^IMG-[0-9]{3}$"
+        filename:
+          type: string
+        extension:
+          type: string
+        order:
+          type: integer
+        near_block_id:
+          type: string
+        near_table_id:
+          type: [string, "null"]
+        section_path:
+          type: array
+          items:
+            type: string
+        nearby_text:
+          type: string

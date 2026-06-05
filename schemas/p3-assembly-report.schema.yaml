@@ -1,0 +1,27 @@
+type: object
+required:
+  - p3_assembly_report
+properties:
+  p3_assembly_report:
+    type: object
+    required:
+      - status
+      - generated_at
+      - required_workspaces
+      - validated_workspace_ids
+      - missing_or_failed
+    properties:
+      status:
+        enum: [passed, failed]
+      generated_at:
+        type: string
+      required_workspaces:
+        type: array
+      validated_workspace_ids:
+        type: array
+        items:
+          type: string
+      missing_or_failed:
+        type: array
+        items:
+          type: string

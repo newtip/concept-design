@@ -1,0 +1,31 @@
+type: object
+required:
+  - checkpoint_decision_trace
+properties:
+  checkpoint_decision_trace:
+    type: object
+    required:
+      - checkpoint_id
+      - decisions
+    properties:
+      checkpoint_id:
+        type: string
+      decisions:
+        type: array
+        items:
+          type: object
+          required:
+            - item_id
+            - decision_type
+            - decision_origin
+          properties:
+            item_id:
+              type: string
+            decision_type:
+              type: string
+            decision_origin:
+              type: string
+            authorized_by_question_id:
+              type: string
+            must_not_be_treated_as_original_requirement:
+              type: boolean

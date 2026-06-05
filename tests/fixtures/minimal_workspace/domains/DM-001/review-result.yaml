@@ -1,0 +1,11 @@
+review_result:
+  domain_id: DM-001
+  status: passed
+  reviewed_modules:
+    - MOD-tp-01
+  issue_count: 0
+  blocker_count: 0
+  critical_count: 0
+  source_check_count: 10
+  generic_issue_count: 0
+  issues: []

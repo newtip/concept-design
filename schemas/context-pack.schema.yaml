@@ -1,0 +1,38 @@
+$schema: "urn:concept-design:context-pack:v1"
+required: [context_pack]
+context_pack:
+  required:
+    - meta
+    - current_domain
+    - requirement_context
+    - industry_context
+    - domain_architecture_context
+    - negative_context
+    - decision_boundary
+    - source_registry
+  source_registry:
+    type: object
+    additionalProperties:
+      type: object
+      required:
+        - source_id
+        - category
+        - source_type
+        - status
+        - allowed_usage
+        - forbidden_usage
+      properties:
+        source_id:
+          type: string
+        category:
+          type: string
+        source_type:
+          enum: [requirement_fact, industry_enrichment, risk_note, open_question]
+        title:
+          type: string
+        status:
+          type: string
+        allowed_usage:
+          type: array
+        forbidden_usage:
+          type: array

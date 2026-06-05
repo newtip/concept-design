@@ -1,0 +1,88 @@
+type: object
+required:
+  - p3_workspace_output
+properties:
+  p3_workspace_output:
+    type: object
+    required:
+      - workspace_id
+      - domain_id
+      - subdomain_id
+      - generated_at
+      - status
+      - input_artifacts
+      - included_item_ids
+      - excluded_item_ids
+      - modified_item_ids
+      - added_item_ids
+      - deleted_item_ids
+    properties:
+      workspace_id:
+        type: string
+      domain_id:
+        type: string
+      subdomain_id:
+        type: string
+      generated_at:
+        type: string
+      status:
+        type: string
+      input_artifacts:
+        type: object
+        required:
+          - workspace_manifest
+        additionalProperties:
+          type: string
+      included_item_ids:
+        type: array
+        items:
+          type: string
+      excluded_item_ids:
+        type: array
+        items:
+          type: string
+      modified_item_ids:
+        type: array
+        items:
+          type: string
+      added_item_ids:
+        type: array
+        items:
+          type: string
+      deleted_item_ids:
+        type: array
+        items:
+          type: string
+      source_ids_used:
+        type: array
+        items:
+          type: string
+      business_design_summary:
+        type: string
+      data_model_design:
+        type: object
+      function_design:
+        type: array
+      workflow_design:
+        type: array
+      page_design:
+        type: array
+      interface_design:
+        type: array
+      dfx_design:
+        type: array
+      unsupported_design:
+        type: array
+      open_issues:
+        type: array
+      traceability:
+        type: object
+        properties:
+          formal_source_ids:
+            type: array
+            items:
+              type: string
+          reference_only_source_ids:
+            type: array
+            items:
+              type: string

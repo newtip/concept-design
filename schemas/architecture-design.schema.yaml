@@ -1,0 +1,14 @@
+$schema: "urn:concept-design:architecture-design:v1"
+required: [architecture_design]
+architecture_design:
+  required: [project_name, domains, contexts, aggregates, coverage_validation]
+  domains:
+    type: array
+    items:
+      required: [domain_id, domain_name, domain_type, requirement_scope, industry_scope, ddd_scope]
+  coverage_validation:
+    required:
+      - all_confirmed_functions_mapped
+      - all_events_have_producer_domain
+      - all_rules_mapped
+      - industry_risks_mapped

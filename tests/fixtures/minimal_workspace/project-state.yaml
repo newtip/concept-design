@@ -1,0 +1,10 @@
+project_state:
+  phase: new
+  run_id: e2e-minimal
+  checkpoint_confirmed: false
+  baselines_frozen: false
+  context_packs_built: false
+  p2_complete: false
+  design_mode: null
+  p2_execution_mode: null
+  history: []
